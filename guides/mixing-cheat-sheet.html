@@ -1,0 +1,289 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Mixing Cheat Sheet</title>
+<style>
+@page { size: A4; margin: 11mm; }
+:root{--ink:#16161c;--mute:#5b5b66;--line:#d9d9e0;--drum:#e13732;--bass:#914bd7;--music:#377deb;--vox:#e9b10f;--fx:#2fb36a;--send:#eb5fb9;--master:#16161c;}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--ink);font-size:9.6pt;line-height:1.35;margin:0}
+h1{font-size:21pt;margin:0;letter-spacing:-.3px}
+.sub{color:var(--mute);margin:2px 0 8px}
+h2{font-size:12pt;margin:10px 0 5px;padding:4px 9px;background:var(--ink);color:#fff;border-radius:5px;break-after:avoid}
+h3{font-size:10pt;margin:6px 0 3px;break-after:avoid}
+table{border-collapse:collapse;width:100%;margin:3px 0 6px;break-inside:avoid}
+th,td{border:1px solid var(--line);padding:3px 5px;text-align:left;vertical-align:top;font-size:8.8pt}
+th{background:#f1f1f5}
+.pb{break-before:page}
+.box{border:1px solid var(--line);border-left:5px solid var(--music);border-radius:5px;padding:5px 9px;margin:5px 0;background:#f7f9ff;break-inside:avoid}
+.ok{border-left-color:var(--fx);background:#f3fcf6}.warn{border-left-color:#f59e0b;background:#fffaf0}
+.small{font-size:8pt;color:var(--mute)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{display:inline-block;padding:1px 6px;border-radius:9px;color:#fff;font-size:8pt;font-weight:bold}
+svg text{font-family:"Helvetica Neue",Arial,sans-serif}
+ol,ul{margin:2px 0 4px 16px;padding:0} li{margin:1px 0}
+.big{font-size:10.5pt}
+</style></head><body>
+
+<h1>Mixing Cheat Sheet</h1>
+<p class="sub">Stems + vocals in FL Studio 21 · your Stem Mixer template, master presets, delay presets and 18 vocal presets</p>
+
+<h2>1 · How your mix flows</h2>
+<svg viewBox="0 0 760 210" width="100%">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#888"/></marker></defs>
+  <!-- stems -->
+  <g font-size="11" fill="#fff" font-weight="bold">
+    <rect x="5" y="8" width="150" height="34" rx="6" fill="#e13732"/><text x="80" y="29" text-anchor="middle">Drum stems (1-7)</text>
+    <rect x="5" y="50" width="150" height="34" rx="6" fill="#914bd7"/><text x="80" y="71" text-anchor="middle">808 / Bass (8-9)</text>
+    <rect x="5" y="92" width="150" height="34" rx="6" fill="#377deb"/><text x="80" y="113" text-anchor="middle">Melodies + FX (10-14)</text>
+    <rect x="5" y="134" width="150" height="34" rx="6" fill="#e9b10f"/><text x="80" y="155" text-anchor="middle">Vocals (15-16)</text>
+    <rect x="5" y="176" width="150" height="28" rx="6" fill="#bbb"/><text x="80" y="194" text-anchor="middle" fill="#333">Full mix ref (17) muted</text>
+  </g>
+  <g stroke="#888" stroke-width="2" marker-end="url(#a)">
+    <line x1="158" y1="25" x2="268" y2="25"/><line x1="158" y1="67" x2="268" y2="67"/>
+    <line x1="158" y1="109" x2="268" y2="109"/><line x1="158" y1="151" x2="268" y2="151"/>
+    <line x1="158" y1="190" x2="560" y2="190"/>
+  </g>
+  <g font-size="11" font-weight="bold">
+    <rect x="272" y="8" width="130" height="34" rx="6" fill="#fff" stroke="#e13732" stroke-width="3"/><text x="337" y="29" text-anchor="middle">DRUMS BUS</text>
+    <rect x="272" y="50" width="130" height="34" rx="6" fill="#fff" stroke="#914bd7" stroke-width="3"/><text x="337" y="71" text-anchor="middle">BASS BUS</text>
+    <rect x="272" y="92" width="130" height="34" rx="6" fill="#fff" stroke="#377deb" stroke-width="3"/><text x="337" y="113" text-anchor="middle">MUSIC BUS</text>
+    <rect x="272" y="134" width="130" height="34" rx="6" fill="#fff" stroke="#e9b10f" stroke-width="3"/><text x="337" y="155" text-anchor="middle">VOCAL BUS</text>
+  </g>
+  <g stroke="#888" stroke-width="2" marker-end="url(#a)">
+    <line x1="405" y1="25" x2="558" y2="95"/><line x1="405" y1="67" x2="558" y2="100"/>
+    <line x1="405" y1="109" x2="558" y2="105"/><line x1="405" y1="151" x2="558" y2="112"/>
+  </g>
+  <rect x="562" y="70" width="190" height="70" rx="8" fill="#16161c"/>
+  <text x="657" y="96" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">MASTER</text>
+  <text x="657" y="115" fill="#ccc" font-size="9.5" text-anchor="middle">EQ → Comp → Clipper → Limiter</text>
+  <text x="657" y="130" fill="#ccc" font-size="9.5" text-anchor="middle">load: MASTER - (genre)</text>
+  <!-- sends -->
+  <rect x="432" y="170" width="110" height="34" rx="6" fill="#eb5fb9"/><text x="487" y="191" fill="#fff" font-size="10.5" font-weight="bold" text-anchor="middle">REVERB · DELAY</text>
+  <path d="M337 168 Q 380 186 430 186" stroke="#eb5fb9" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#a)"/>
+  <text x="372" y="204" font-size="8.5" fill="#666">sends (optional)</text>
+</svg>
+<p class="small">Balance the song with the <b>4 bus faders</b>. Use single tracks only to fix one sound. Vocal presets go on tracks 15-16 (or any track).</p>
+
+<h2>2 · Starting levels (peak meter, before the master chain)</h2>
+<div class="grid2">
+<svg viewBox="0 0 370 250" width="100%">
+  <text x="0" y="11" font-size="10" font-weight="bold">Where each part should peak (dBFS)</text>
+  <g font-size="9">
+  <!-- scale 0 to -24 dB → x 120..360 -->
+  <line x1="120" y1="20" x2="120" y2="240" stroke="#ccc"/>
+  <text x="120" y="248" text-anchor="middle">0</text><text x="180" y="248" text-anchor="middle">-6</text><text x="240" y="248" text-anchor="middle">-12</text><text x="300" y="248" text-anchor="middle">-18</text><text x="356" y="248" text-anchor="middle">-24</text>
+  <line x1="180" y1="20" x2="180" y2="240" stroke="#eee"/><line x1="240" y1="20" x2="240" y2="240" stroke="#eee"/><line x1="300" y1="20" x2="300" y2="240" stroke="#eee"/>
+  </g>
+  <g font-size="9.5">
+  <text x="0" y="35">Kick</text><rect x="180" y="26" width="20" height="12" rx="3" fill="#e13732"/>
+  <text x="0" y="55">Snare / clap</text><rect x="185" y="46" width="25" height="12" rx="3" fill="#e13732"/>
+  <text x="0" y="75">808 / bass</text><rect x="180" y="66" width="30" height="12" rx="3" fill="#914bd7"/>
+  <text x="0" y="95">Lead vocal</text><rect x="180" y="86" width="25" height="12" rx="3" fill="#e9b10f"/>
+  <text x="0" y="115">Backing vocals</text><rect x="235" y="106" width="25" height="12" rx="3" fill="#e9b10f" opacity=".75"/>
+  <text x="0" y="135">Adlibs</text><rect x="225" y="126" width="25" height="12" rx="3" fill="#e9b10f" opacity=".75"/>
+  <text x="0" y="155">Chords / keys</text><rect x="240" y="146" width="30" height="12" rx="3" fill="#377deb"/>
+  <text x="0" y="175">Melodies</text><rect x="240" y="166" width="25" height="12" rx="3" fill="#377deb"/>
+  <text x="0" y="195">Hats / perc</text><rect x="270" y="186" width="30" height="12" rx="3" fill="#f58a1e"/>
+  <text x="0" y="215">FX / risers</text><rect x="290" y="206" width="30" height="12" rx="3" fill="#2fb36a"/>
+  <text x="0" y="235">Reverb / delay</text><rect x="320" y="226" width="30" height="12" rx="3" fill="#eb5fb9"/>
+  </g>
+</svg>
+<div>
+<div class="box ok big"><b>The 3 rules that matter</b>
+<ol>
+<li><b>Master peaks around -6 to -3 dB</b> before the mastering chain. Never in the red while mixing.</li>
+<li><b>Lead vocal sits 3-6 dB above the loudest instrument</b>. It's the star.</li>
+<li><b>Backing = 6-9 dB under the lead. Adlibs = 4-6 dB under.</b> Doubles: 4-6 dB under.</li>
+</ol></div>
+<h3>Balancing order</h3>
+<ol>
+<li>Kick alone → set it.</li><li>Add 808 / bass until it feels equal to the kick by ear.</li><li>Snare/clap, then hats/perc.</li><li>Lead vocal on top.</li><li>Chords → melodies → FX, tucked under the vocal.</li><li>Switch to mono for 10 s: does the vocal and 808 stay solid?</li>
+</ol>
+<p class="small">Bars are starting points from common mix guides. Your ears decide. Level-match before judging "better".</p>
+</div></div>
+
+<h2>3 · Frequency map: who lives where</h2>
+<svg viewBox="0 0 760 175" width="100%">
+  <g font-size="9" fill="#555">
+   <text x="40" y="12">20 Hz</text><text x="135" y="12">60</text><text x="225" y="12">250</text><text x="330" y="12">500</text><text x="440" y="12">2k</text><text x="545" y="12">5k</text><text x="640" y="12">10k</text><text x="720" y="12">20k</text>
+  </g>
+  <g>
+   <rect x="40" y="18" width="95" height="18" fill="#3b2a5c"/><text x="87" y="31" fill="#fff" font-size="9" text-anchor="middle">SUB · feel</text>
+   <rect x="135" y="18" width="90" height="18" fill="#5a3f8a"/><text x="180" y="31" fill="#fff" font-size="9" text-anchor="middle">LOW · weight</text>
+   <rect x="225" y="18" width="105" height="18" fill="#b05a2a"/><text x="277" y="31" fill="#fff" font-size="9" text-anchor="middle">LOW-MID · MUD zone</text>
+   <rect x="330" y="18" width="110" height="18" fill="#9a8a2a"/><text x="385" y="31" fill="#fff" font-size="9" text-anchor="middle">MID · body/boxy</text>
+   <rect x="440" y="18" width="105" height="18" fill="#2a8a6a"/><text x="492" y="31" fill="#fff" font-size="9" text-anchor="middle">PRESENCE · clarity</text>
+   <rect x="545" y="18" width="95" height="18" fill="#2a6a9a"/><text x="592" y="31" fill="#fff" font-size="9" text-anchor="middle">SIBILANCE · "sss"</text>
+   <rect x="640" y="18" width="100" height="18" fill="#4a4a9a"/><text x="690" y="31" fill="#fff" font-size="9" text-anchor="middle">AIR · shine</text>
+  </g>
+  <g font-size="9.5" font-weight="bold" fill="#fff">
+   <rect x="40" y="46" width="150" height="16" rx="8" fill="#914bd7"/><text x="115" y="58" text-anchor="middle">808 / sub bass</text>
+   <rect x="60" y="66" width="120" height="16" rx="8" fill="#e13732"/><text x="120" y="78" text-anchor="middle">kick body</text>
+   <rect x="470" y="66" width="70" height="16" rx="8" fill="#e13732"/><text x="505" y="78" text-anchor="middle">kick click</text>
+   <rect x="190" y="86" width="270" height="16" rx="8" fill="#e13732" opacity=".85"/><text x="325" y="98" text-anchor="middle">snare / clap body → crack at 2-5k</text>
+   <rect x="520" y="106" width="220" height="16" rx="8" fill="#f58a1e"/><text x="630" y="118" text-anchor="middle">hats · shakers · cymbals</text>
+   <rect x="200" y="126" width="360" height="16" rx="8" fill="#377deb"/><text x="380" y="138" text-anchor="middle">chords · keys · pads · melodies</text>
+   <rect x="175" y="146" width="560" height="16" rx="8" fill="#e9b10f"/><text x="455" y="158" text-anchor="middle" fill="#333">VOCALS: low-cut ~90-120 Hz · cut mud 300-450 · presence 3.5-5k · de-ess 5-7k · air 10-12k</text>
+  </g>
+</svg>
+<p class="small">Two things fighting in the same zone = mud. Fix by <b>cutting one</b> of them there (EQ), or <b>ducking</b> one under the other (sidechain), not by turning both up.</p>
+
+<h2 class="pb">4 · Your 18 vocal presets: pick in 3 steps</h2>
+<svg viewBox="0 0 760 120" width="100%">
+  <g font-size="11" font-weight="bold">
+  <rect x="5" y="10" width="200" height="100" rx="10" fill="#f1f1f5"/>
+  <text x="105" y="32" text-anchor="middle">1 · GENRE</text>
+  <text x="105" y="55" text-anchor="middle" fill="#d92d20">Hip Hop = rap</text>
+  <text x="105" y="75" text-anchor="middle" fill="#16a34a">Afrobeats = sung, bright</text>
+  <text x="105" y="95" text-anchor="middle" fill="#7c3aed">RnB = sung, smooth</text>
+  <text x="225" y="65" font-size="22" fill="#999">→</text>
+  <rect x="255" y="10" width="200" height="100" rx="10" fill="#f1f1f5"/>
+  <text x="355" y="32" text-anchor="middle">2 · VOICE</text>
+  <text x="355" y="60" text-anchor="middle">Male = deeper voice</text>
+  <text x="355" y="85" text-anchor="middle">Female = higher voice</text>
+  <text x="475" y="65" font-size="22" fill="#999">→</text>
+  <rect x="505" y="10" width="250" height="100" rx="10" fill="#f1f1f5"/>
+  <text x="630" y="32" text-anchor="middle">3 · ROLE</text>
+  <text x="630" y="55" text-anchor="middle">Lead = main vocal, upfront</text>
+  <text x="630" y="75" text-anchor="middle">Backing = harmonies, doubles</text>
+  <text x="630" y="95" text-anchor="middle">Adlibs = "yeah!", chants, shouts</text>
+  </g>
+</svg>
+<div class="box ok big"><b>Load one:</b> Browser (left) → <b>Mixer presets</b> → drag e.g. <b>VOX - Afrobeats - Female Lead</b> onto your vocal's mixer track.
+Or right-click the track name → <b>File</b> → pick it. The full 8-plugin chain loads in one go.</div>
+
+<h3>What's inside every vocal preset (in order)</h3>
+<svg viewBox="0 0 760 64" width="100%">
+ <g font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle">
+  <rect x="2" y="4" width="88" height="40" rx="6" fill="#999"/><text x="46" y="21">1 Pitcher</text><text x="46" y="35" font-weight="normal">OFF (tuning)</text>
+  <rect x="96" y="4" width="88" height="40" rx="6" fill="#2a6a9a"/><text x="140" y="21">2 EQ clean</text><text x="140" y="35" font-weight="normal">low-cut, mud</text>
+  <rect x="190" y="4" width="88" height="40" rx="6" fill="#4a4a9a"/><text x="234" y="21">3 De-esser</text><text x="234" y="35" font-weight="normal">Maximus</text>
+  <rect x="284" y="4" width="88" height="40" rx="6" fill="#b05a2a"/><text x="328" y="21">4 Comp FAST</text><text x="328" y="35" font-weight="normal">catches peaks</text>
+  <rect x="378" y="4" width="88" height="40" rx="6" fill="#9a6a2a"/><text x="422" y="21">5 Comp SMOOTH</text><text x="422" y="35" font-weight="normal">evens it out</text>
+  <rect x="472" y="4" width="88" height="40" rx="6" fill="#2a8a6a"/><text x="516" y="21">6 EQ tone</text><text x="516" y="35" font-weight="normal">presence, air</text>
+  <rect x="566" y="4" width="88" height="40" rx="6" fill="#eb5fb9"/><text x="610" y="21">7 Delay</text><text x="610" y="35" font-weight="normal">tempo-synced</text>
+  <rect x="660" y="4" width="96" height="40" rx="6" fill="#c0399a"/><text x="708" y="21">8 Reverb</text><text x="708" y="35" font-weight="normal">space</text>
+ </g>
+ <text x="380" y="60" font-size="9" fill="#555" text-anchor="middle">Order from research: clean EQ → de-ess → compress in 2 stages → tone EQ → time effects (Ghostnote, Rys Up Audio, Audient)</text>
+</svg>
+
+<table>
+<tr><th style="width:16%"></th><th>Lead</th><th>Backing</th><th>Adlibs</th></tr>
+<tr><td><b>Low-cut</b> (M / F)</td><td>90 / 120 Hz</td><td>170 / 200 Hz: thinner, so it doesn't crowd the lead</td><td>250 / 280 Hz: thin, "in the back"</td></tr>
+<tr><td><b>Mud cut</b> (M 300 · F 450 Hz)</td><td>-2.5 dB</td><td>-4 dB</td><td>-3 dB</td></tr>
+<tr><td><b>Presence</b> (M 3.5k · F 5k)</td><td>+2 dB</td><td><b>-2 dB</b> (lead wins)</td><td>+2.5 dB (cuts through)</td></tr>
+<tr><td><b>Top end</b></td><td>Air shelf +2.5 to +3.5 dB (M 10k · F 12k)</td><td>Rolled off above 11 kHz</td><td>Air +1.5 dB</td></tr>
+<tr><td><b>Compression</b></td><td>Genre ratio (below)</td><td colspan="2">4:1 fast comp: more even, sits back</td></tr>
+<tr><td><b>Delay / reverb</b></td><td>Low: delay 15%, small verb</td><td>More: delay 18%, longer verb</td><td>Most: delay 25%, medium verb</td></tr>
+</table>
+<table>
+<tr><th style="width:16%"></th><th><span class="chip" style="background:#d92d20">Hip Hop</span></th><th><span class="chip" style="background:#16a34a">Afrobeats</span></th><th><span class="chip" style="background:#7c3aed">RnB</span></th></tr>
+<tr><td><b>Fast comp</b></td><td>4:1, 1.5 ms attack: tight, aggressive</td><td>3:1, 5 ms attack</td><td>3:1, 15 ms attack: keeps the breath</td></tr>
+<tr><td><b>Smooth comp</b></td><td>2.5:1, 25 ms</td><td>2:1, 30 ms</td><td>2:1, 30 ms, 250 ms release</td></tr>
+<tr><td><b>Reverb</b></td><td>~0.9 s, small: dry and upfront</td><td>~1.2 s plate: bright</td><td>~2.2 s: lush</td></tr>
+<tr><td><b>Delay</b></td><td>1/4 throws · adlibs 1/8</td><td>1/4 last-word throw · backing 1/8 dotted</td><td>1/8 dotted · backing 1/4 dotted</td></tr>
+</table>
+
+<div class="box warn"><b>Tweak these 3 things per song</b>
+<ol>
+<li><b>Compressor THRESHOLD</b> (slots 4 and 5): sing/rap the loudest line and aim for <b>3-6 dB</b> of turning down on slot 4 and <b>1-3 dB</b> on slot 5. If your vocal is quiet, lower the threshold. If loud, raise it.</li>
+<li><b>De-esser</b>: still hissy on "s"? Open Maximus and raise the mid band's compression. Lisping? Lower it.</li>
+<li><b>Pitcher</b> (slot 1, OFF): for sung vocals, switch it ON and set the song's key. Leave it off for rap.</li>
+</ol></div>
+
+<h2 class="pb">5 · Sidechain map: who ducks under whom</h2>
+<div class="grid2">
+<svg viewBox="0 0 370 230" width="100%">
+ <defs><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+ <g font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">
+  <rect x="10" y="20" width="110" height="34" rx="6" fill="#e13732"/><text x="65" y="41">KICK</text>
+  <rect x="10" y="150" width="110" height="34" rx="6" fill="#e9b10f"/><text x="65" y="171" fill="#333">LEAD VOCAL</text>
+  <rect x="240" y="5" width="120" height="30" rx="6" fill="#914bd7"/><text x="300" y="25">BASS BUS</text>
+  <rect x="240" y="75" width="120" height="30" rx="6" fill="#377deb"/><text x="300" y="95">MUSIC BUS</text>
+  <rect x="240" y="175" width="120" height="30" rx="6" fill="#eb5fb9"/><text x="300" y="195">REVERB</text>
+ </g>
+ <g stroke="#333" stroke-width="2" fill="none" marker-end="url(#b)">
+  <path d="M122 32 L236 22"/><path d="M122 44 L236 88"/><path d="M122 160 L236 98"/><path d="M122 176 L236 190"/>
+ </g>
+ <g font-size="9" fill="#333">
+  <text x="150" y="20">4:1 · 3-10 dB</text><text x="140" y="80">2-4 dB (light)</text><text x="132" y="140">~2 dB</text><text x="150" y="200">4:1 (verb dips)</text>
+ </g>
+</svg>
+<div>
+<div class="box"><b>How to link (every time):</b>
+<ol><li>Click the <b>trigger</b> track (KICK or LEAD VOCAL).</li>
+<li>Right-click the small arrow under the <b>target</b> → <i>Sidechain to this track</i>.</li>
+<li>Target's <b>Fruity Limiter</b>: CEIL up → <b>COMP</b> → right-click SIDECHAIN → pick trigger → lower threshold.</li></ol></div>
+<table>
+<tr><th>Duck amount</th><th>HH</th><th>Afro</th><th>RnB</th></tr>
+<tr><td>Kick → Bass</td><td>7-10 dB</td><td>4-6 dB</td><td>3-5 dB</td></tr>
+<tr><td>Kick → Music</td><td>2-3</td><td>2-4</td><td>0-2</td></tr>
+<tr><td>Vocal → Music</td><td>~2</td><td>~2</td><td>~2</td></tr>
+</table>
+<p class="small">No kick stem? Use <b>DRUMS LOW</b> as the trigger. Clicky? Raise REL.</p>
+</div></div>
+
+<h2>6 · Stereo stage: where things sit (seen from above)</h2>
+<svg viewBox="0 0 760 150" width="100%">
+ <rect x="20" y="10" width="720" height="120" rx="10" fill="#f6f6f9" stroke="#ddd"/>
+ <line x1="380" y1="10" x2="380" y2="130" stroke="#ccc" stroke-dasharray="4 4"/>
+ <text x="30" y="145" font-size="9" fill="#777">LEFT</text><text x="370" y="145" font-size="9" fill="#777">CENTER</text><text x="705" y="145" font-size="9" fill="#777">RIGHT</text>
+ <text x="728" y="26" font-size="8.5" fill="#777" text-anchor="end">front ↑</text><text x="728" y="127" font-size="8.5" fill="#777" text-anchor="end">back ↓</text>
+ <g font-size="9.5" font-weight="bold" text-anchor="middle" fill="#fff">
+  <rect x="315" y="18" width="130" height="18" rx="9" fill="#e9b10f"/><text x="380" y="31" fill="#333">LEAD VOCAL (dry-ish)</text>
+  <rect x="330" y="42" width="100" height="16" rx="8" fill="#e13732"/><text x="380" y="54">kick · snare · 808</text>
+  <rect x="110" y="40" width="90" height="16" rx="8" fill="#f58a1e"/><text x="155" y="52">perc / congas</text>
+  <rect x="560" y="40" width="90" height="16" rx="8" fill="#f58a1e"/><text x="605" y="52">hats / shaker</text>
+  <rect x="200" y="66" width="80" height="16" rx="8" fill="#e9b10f" opacity=".85"/><text x="240" y="78" fill="#333">adlibs</text>
+  <rect x="480" y="66" width="80" height="16" rx="8" fill="#e9b10f" opacity=".85"/><text x="520" y="78" fill="#333">adlibs</text>
+  <rect x="40" y="92" width="110" height="16" rx="8" fill="#e9b10f" opacity=".7"/><text x="95" y="104" fill="#333">harmonies (wide)</text>
+  <rect x="610" y="92" width="110" height="16" rx="8" fill="#e9b10f" opacity=".7"/><text x="665" y="104" fill="#333">harmonies (wide)</text>
+  <rect x="240" y="92" width="280" height="16" rx="8" fill="#377deb"/><text x="380" y="104">chords · pads (stereo, wide)</text>
+  <rect x="120" y="112" width="90" height="14" rx="7" fill="#eb5fb9"/><text x="165" y="123" font-size="8.5">reverb tails</text>
+  <rect x="550" y="112" width="90" height="14" rx="7" fill="#eb5fb9"/><text x="595" y="123" font-size="8.5">reverb tails</text>
+ </g>
+</svg>
+<p class="small"><b>Center:</b> kick, snare, 808/bass (mono), lead vocal. <b>Sides:</b> perc, hats, harmonies, guitar, arps. <b>Front ↔ back</b> = less ↔ more reverb and high-end. Doubles: 30-50% L/R, harmonies 70-100% L/R (Rys Up Audio).</p>
+
+<h2 class="pb">7 · "It sounds…" → fix it</h2>
+<table>
+<tr><th style="width:24%">Problem</th><th>Try this (in order)</th></tr>
+<tr><td><b>Muddy / cloudy</b></td><td>Cut 250-450 Hz on chords/pads/vocal (-2 to -4 dB) · raise low-cuts on everything that isn't kick or bass · less reverb, and low-cut the reverb at 300 Hz</td></tr>
+<tr><td><b>Vocal buried</b></td><td>Raise the vocal fader first · +1-2 dB presence (3-5k) · Lead vocal → Music bus sidechain (~2 dB) · cut 2-4k a little on chords/melodies</td></tr>
+<tr><td><b>Vocal harsh / "sss"</b></td><td>More de-essing (Maximus) · less presence/air boost · darker reverb (high cut 6-7k)</td></tr>
+<tr><td><b>808 disappears on phone</b></td><td>Fruity Soft Clipper on the 808 for harmonics · check kick vs 808 sidechain · don't low-cut the 808</td></tr>
+<tr><td><b>Kick and 808 fight</b></td><td>Kick → Bass bus sidechain · or the 808 EQ trick (Peak Controller on kick, inverted link to an EQ band under 200 Hz on the 808)</td></tr>
+<tr><td><b>Mix sounds small / narrow</b></td><td>Pan perc, hats and harmonies out · stereo chords/pads · keep low end centered</td></tr>
+<tr><td><b>Vocal sounds far away</b></td><td>Less reverb/delay wet · shorter reverb · more pre-delay (30-40 ms) so the voice comes first</td></tr>
+<tr><td><b>Pumping / breathing</b></td><td>Less gain reduction on the master compressor · slower release on the sidechain</td></tr>
+<tr><td><b>Distorts / red on master</b></td><td>Pull the 4 bus faders down, not the master · master peaks around -6 dB before limiting</td></tr>
+</table>
+
+<h2>8 · Every song: the 10-step routine</h2>
+<svg viewBox="0 0 760 120" width="100%">
+ <g font-size="8.6" text-anchor="middle">
+  <g fill="#16161c"><circle cx="38" cy="25" r="16"/><circle cx="114" cy="25" r="16"/><circle cx="190" cy="25" r="16"/><circle cx="266" cy="25" r="16"/><circle cx="342" cy="25" r="16"/>
+  <circle cx="418" cy="25" r="16"/><circle cx="494" cy="25" r="16"/><circle cx="570" cy="25" r="16"/><circle cx="646" cy="25" r="16"/><circle cx="722" cy="25" r="16"/></g>
+  <g fill="#fff" font-weight="bold"><text x="38" y="29">1</text><text x="114" y="29">2</text><text x="190" y="29">3</text><text x="266" y="29">4</text><text x="342" y="29">5</text><text x="418" y="29">6</text><text x="494" y="29">7</text><text x="570" y="29">8</text><text x="646" y="29">9</text><text x="722" y="29">10</text></g>
+  <g fill="#222">
+   <text x="38" y="58">File → New,</text><text x="38" y="70">drag stems in</text>
+   <text x="114" y="58">Run</text><text x="114" y="70">Stem Mixer</text>
+   <text x="190" y="58">Vocal presets</text><text x="190" y="70">on 15 / 16</text>
+   <text x="266" y="58">Gain stage:</text><text x="266" y="70">master -6 dB</text>
+   <text x="342" y="58">Balance</text><text x="342" y="70">kick, bass, vox</text>
+   <text x="418" y="58">Sidechain</text><text x="418" y="70">kick → bass</text>
+   <text x="494" y="58">Fix problems</text><text x="494" y="70">(section 7)</text>
+   <text x="570" y="58">Load</text><text x="570" y="70">MASTER preset</text>
+   <text x="646" y="58">Limiter GAIN to</text><text x="646" y="70">LUFS target</text>
+   <text x="722" y="58">Compare with</text><text x="722" y="70">FULL MIX (17)</text>
+  </g>
+ </g>
+</svg>
+
+<table>
+<tr><th>Your presets</th><th>Where in FL</th><th>What</th></tr>
+<tr><td>VOX - (genre) - (voice) (role) × 18</td><td>Browser → Mixer presets</td><td>Full vocal chain for one track</td></tr>
+<tr><td>MASTER - Hip Hop / Afrobeats / RnB</td><td>Browser → Mixer presets</td><td>Mastering chain for the Master track</td></tr>
+<tr><td>HIP HOP / AFROBEATS / RnB delays × 5</td><td>Fruity Delay 3 → Presets</td><td>Echo only (dry 0%), for a DELAY send track</td></tr>
+<tr><td>Stem Mixer script</td><td>Options → MIDI Settings → Controller type</td><td>Builds and routes the 23-track mixer</td></tr>
+</table>
+<p class="small"><b>Sources:</b> Ghostnote (rap vocal chain; de-essing in FL Studio) · Dan Murtagh (vocal EQ cheat sheet) · Rys Up Audio (R&amp;B vocals, hip-hop vocals) · Antares (Afrobeats vocal production) · Audient (basic vocal chain) · Adrian Milea &amp; Modern Mixing (background vocals) · Avid (vocal EQ) · Mix Elite (sidechain in FL Studio) · Mastering-France / Venia (loudness). All numbers are starting points. Trust your ears and compare at equal loudness.</p>
+</body></html>
