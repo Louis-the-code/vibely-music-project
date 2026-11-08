@@ -1,15 +1,18 @@
 # Vocal Preset Builder (developer tool)
 # -------------------------------------
-# Used to build the 18 VOX mixer presets in FL Studio 21 (scripting API v30).
+# Used to build the VOX mixer presets (24 so far) in FL Studio 21 (scripting API v30).
 # It sets every knob of a fixed 8-slot vocal chain by *displayed value*
 # (Hz, dB, ms, ratio) using a bisection search, then prints a read-back line.
 #
-# How it was run: imported from the Stem Mixer device script's OnInit while a
-# mixer track held this chain:  0 Pitcher | 1 Parametric EQ 2 | 2 Maximus
+# How to run: in FL, View > Script output > Interpreter, with this folder on
+# sys.path, while mixer Insert 1 holds this chain:
+#   0 Pitcher | 1 Parametric EQ 2 | 2 Maximus
 # (De-esser split band) | 3 Fruity Compressor | 4 Fruity Compressor |
 # 5 Parametric EQ 2 | 6 Fruity Delay 3 | 7 Fruity Reeverb 2
-# Set MODE="apply" and CURRENT="Genre|Voice|Role", reload the script, then save
-# the track with Ctrl+Shift+S (Save mixer track state).
+#   >>> import sys; sys.path.append(r"<this folder>")
+#   >>> import vocal_preset_builder as vj; vj.build("House", "Female", "Lead")
+# Then set the delay slot by hand (see docs/add-a-genre.md) and save the track
+# with Ctrl+Shift+S (Save mixer track state).
 #
 # Known limits (FL 21): plugins.setParamValue cannot write Fruity Delay 3
 # (all values jump to max), so delays were set by loading Delay 3 presets.
@@ -105,21 +108,9 @@ def set_vol_db(db):
     return "%.1f dB" % mixer.getTrackVolume(TRACK, 1)
 
 # ------------------------------------------------------------ presets
-VOICE = {
-    "Male":   dict(hpf=90,  mud=300, nasal=1000, pres=3500, air=10000, deess=5000),
-    "Female": dict(hpf=120, mud=450, nasal=1200, pres=5000, air=12000, deess=7000),
-}
-GENRE = {   # comp1 (fast), comp2 (smooth), delay/reverb per role
-    "Hip Hop": dict(c1=(-18, 4.0, 3.0, 1.5, 110), c2=(-18, 2.5, 1.5, 25, 220), nasal_cut=-1.5, air_boost=2.5,
-                    dly={"Lead": (192, 15, 5000, 12), "Backing": (192, 20, 5000, 15), "Adlibs": (144, 25, 5000, 25)},
-                    rev={"Lead": (30, 0.9, 25, 12), "Backing": (45, 1.5, 30, 22), "Adlibs": (40, 1.2, 30, 18)}),
-    "Afrobeats": dict(c1=(-20, 3.0, 3.0, 5, 100), c2=(-18, 2.0, 1.0, 30, 200), nasal_cut=0.0, air_boost=3.5,
-                    dly={"Lead": (192, 12, 6000, 15), "Backing": (144, 25, 6000, 18), "Adlibs": (144, 25, 5500, 25)},
-                    rev={"Lead": (40, 1.2, 30, 15), "Backing": (55, 2.0, 35, 25), "Adlibs": (50, 1.5, 30, 20)}),
-    "RnB": dict(c1=(-20, 3.0, 3.0, 15, 120), c2=(-18, 2.0, 1.0, 30, 250), nasal_cut=0.0, air_boost=3.0,
-                    dly={"Lead": (144, 25, 4500, 15), "Backing": (288, 30, 4000, 20), "Adlibs": (144, 30, 4500, 25)},
-                    rev={"Lead": (60, 2.2, 40, 18), "Backing": (75, 3.0, 45, 30), "Adlibs": (60, 2.0, 40, 22)}),
-}
+# Genre and voice numbers live in genres.py (same folder) so new genres
+# can be added without touching this file.
+from genres import VOICE, GENRES as GENRE
 
 def build(genre, voice, role):
     v, g = VOICE[voice], GENRE[genre]
