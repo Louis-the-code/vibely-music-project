@@ -31,9 +31,11 @@ Every preset is a **starting point, never a final answer**. See [docs/principles
 | Tool | What it does | Docs |
 |---|---|---|
 | **Stem Mixer** (FL Studio script) | One step builds a color-coded 23-track mixer with drum, bass, music and vocal buses, then **routes every stem to the right track by its file name** | [stem-mixer.md](docs/stem-mixer.md) |
-| **18 vocal presets** | Full 8-plugin vocal chains: Hip Hop / Afrobeats / R&B × Male / Female × Lead / Backing / Adlibs | [vocal-presets.md](docs/vocal-presets.md) |
-| **3 master presets** | Stock-plugin mastering chains for Hip Hop, Afrobeats and R&B, with loudness targets | [master-presets.md](docs/master-presets.md) |
-| **5 delay presets** | Tempo-synced Fruity Delay 3 echoes matched to each genre | [delay-presets.md](docs/delay-presets.md) |
+| **One-click installer** | Double-click `Install-Vibely.bat`: finds your FL user data folder (even in OneDrive) and copies everything into place | [install.md](docs/install.md) |
+| **24 vocal presets** | Full 8-plugin vocal chains: Hip Hop / Afrobeats / R&B / House × Male / Female × Lead / Backing / Adlibs | [vocal-presets.md](docs/vocal-presets.md) |
+| **4 master presets** | Stock-plugin mastering chains for Hip Hop, Afrobeats, R&B and House, with loudness targets | [master-presets.md](docs/master-presets.md) |
+| **7 delay presets** | Tempo-synced Fruity Delay 3 echoes matched to each genre | [delay-presets.md](docs/delay-presets.md) |
+| **Genre system** | Every genre's numbers in one file, plus a template so new genres slot in | [add-a-genre.md](docs/add-a-genre.md) |
 | **Guides** | 4-page Quick Guide and a visual 4-page Mixing Cheat Sheet | [guides/](guides/) |
 
 **Stock plugins only.** Everything uses plugins that ship with FL Studio 21. Pitcher (in the vocal presets, off by default) needs Signature edition or higher.
@@ -58,14 +60,12 @@ Every preset is a **starting point, never a final answer**. See [docs/principles
 ## Quick start
 
 1. Install **loopMIDI** (free) on Windows and create one port. FL Studio only runs scripts through a MIDI device.
-2. Copy [`fl-studio/scripts/StemMixer`](fl-studio/scripts/StemMixer) into your FL **User data folder** → `FL Studio\Settings\Hardware\`
-   (check the exact path in *Options → File settings → User data folder*. It may be inside OneDrive).
-3. Copy the `.fst` files:
-   - `fl-studio/presets/mixer/*` → `FL Studio\Presets\Mixer presets\`
-   - `fl-studio/presets/fruity-delay-3/*` → `FL Studio\Presets\Plugin presets\Effects\Fruity Delay 3\`
-4. Restart FL Studio → **File → New** → drag your stems in.
-5. **Options → MIDI Settings** → select the loopMIDI input → **Controller type: Stem Mixer**. The mixer builds itself.
-6. Drag a **VOX** preset onto your vocal track and a **MASTER** preset onto the Master track. Then use your ears.
+2. Download this repo (**Code → Download ZIP**), unzip it, and double-click **`Install-Vibely.bat`**.
+   It finds your FL user data folder (also inside OneDrive), backs up any old script and copies the script + all presets. It never deletes anything.
+   *(Prefer doing it by hand? See [docs/install.md](docs/install.md).)*
+3. Restart FL Studio → **File → New** → drag your stems in.
+4. **Options → MIDI Settings** → select the loopMIDI input → **Controller type: Stem Mixer**. The mixer builds itself.
+5. Drag a **VOX** preset onto your vocal track and a **MASTER** preset onto the Master track. Then use your ears.
 
 Full walkthrough: [docs/install.md](docs/install.md) · Printable: [Quick Guide](guides/Stem%20Mixer%20Quick%20Guide.pdf) · [Mixing Cheat Sheet](guides/Mixing%20Cheat%20Sheet.pdf)
 
@@ -89,18 +89,34 @@ The whole system was built in one conversation, with the AI researching, writing
 
 ---
 
+## Genres
+
+| Genre | Master | Vocals | Delays | Doc |
+|---|---|---|---|---|
+| Hip Hop | ✅ | 6 | 2 | [vocal-presets.md](docs/vocal-presets.md) |
+| Afrobeats | ✅ | 6 | 2 | [vocal-presets.md](docs/vocal-presets.md) |
+| R&B | ✅ | 6 | 1 | [vocal-presets.md](docs/vocal-presets.md) |
+| House | ✅ | 6 | 2 | [genres/house.md](docs/genres/house.md) |
+| *Your genre next* | | | | [add-a-genre.md](docs/add-a-genre.md) |
+
+All genre numbers live in [`fl-studio/tools/genres.py`](fl-studio/tools/genres.py).
+
+---
+
 ## Repo layout
 
 ```
 vibely-music-project/
 ├─ README.md                  ← you are here
 ├─ CHANGELOG.md               ← every change, newest first
+├─ Install-Vibely.bat / .ps1  ← one-click installer (Windows)
 ├─ docs/                      ← one page per tool + principles + build story
+│  └─ genres/                 ← one page per genre + _template.md
 ├─ fl-studio/
 │  ├─ scripts/StemMixer/      ← the FL Studio script
-│  ├─ presets/mixer/          ← MASTER (3) + VOX (18) mixer track states
-│  ├─ presets/fruity-delay-3/ ← 5 delay presets
-│  └─ tools/                  ← developer tool used to build the vocal presets
+│  ├─ presets/mixer/          ← MASTER (4) + VOX (24) mixer track states
+│  ├─ presets/fruity-delay-3/ ← 7 delay presets
+│  └─ tools/                  ← genres.py (all genre settings) + preset builder
 ├─ guides/                    ← PDFs + their HTML source
 ├─ projects/                  ← songs made with the system (links to listen)
 └─ assets/screenshots/
@@ -109,6 +125,9 @@ vibely-music-project/
 ## Roadmap
 
 - [ ] First song produced with the system → SoundCloud link in `projects/`
+- [x] House presets (master, 6 vocals, 2 delays)
+- [x] One-click installer
+- [ ] More genres: Amapiano, Drill, Dancehall, Pop (see [add-a-genre.md](docs/add-a-genre.md))
 - [ ] Reverb presets to match the delay presets
 - [ ] Maximus versions of the master presets, for A/B comparison
 - [ ] Instrument-bus presets (drums, 808, music)
